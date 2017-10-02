@@ -1,13 +1,15 @@
 package main
 
-import "golang.org/x/tour/pic"
-import "image"
-import "image/color"
+import (
+	"github.com/karlhungus/lib_pxl"
+	"image"
+	"image/color"
+)
 
 type Image struct{}
 
 func (img Image) Bounds() image.Rectangle {
-	return image.Rect(0, 0, 100, 100)
+	return image.Rect(0, 0, 40, 40)
 }
 
 func (img Image) ColorModel() color.Model {
@@ -21,5 +23,8 @@ func (img Image) At(x, y int) color.Color {
 
 func main() {
 	m := Image{}
-	pic.ShowImage(m)
+	//pic.ShowImage(m)
+	lib_pxl.Init()
+	lib_pxl.Display(m)
+	defer lib_pxl.Close()
 }
