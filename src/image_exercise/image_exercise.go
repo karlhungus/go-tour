@@ -9,7 +9,7 @@ import (
 type Image struct{}
 
 func (img Image) Bounds() image.Rectangle {
-	return image.Rect(0, 0, 40, 40)
+	return image.Rect(0, 0, 100, 100)
 }
 
 func (img Image) ColorModel() color.Model {
