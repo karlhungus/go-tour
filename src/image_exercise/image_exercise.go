@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/karlhungus/lib_pxl"
+	"github.com/karlhungus/pxl"
 	"image"
 	"image/color"
 )
@@ -23,8 +23,7 @@ func (img Image) At(x, y int) color.Color {
 
 func main() {
 	m := Image{}
-	//pic.ShowImage(m)
-	lib_pxl.Init()
-	lib_pxl.Display(m)
-	defer lib_pxl.Close()
+	pxl.Init()
+	pxl.Display(m)
+	defer pxl.Close()
 }
