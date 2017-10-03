@@ -8,21 +8,18 @@ import (
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int) {
-	queue := make([]*tree.Tree, 0)
-	queue = append(queue, t)
-	for len(queue) > 0 {
-		current := queue[0]
-		queue = queue[1:]
-		ch <- current.Value
-
-		if current.Left != nil {
-			queue = append(queue, current.Left)
-		}
-		if current.Right != nil {
-			queue = append(queue, current.Right)
-		}
-	}
+	_walk(t, ch)
 	close(ch)
+}
+
+func _walk(t *tree.Tree, ch chan int) {
+	if t == nil {
+		return
+	}
+
+	_walk(t.Left, ch)
+	ch <- t.Value
+	_walk(t.Right, ch)
 }
 
 // Same determines whether the trees
@@ -30,17 +27,10 @@ func Walk(t *tree.Tree, ch chan int) {
 func Same(t1, t2 *tree.Tree) bool {
 	ch1 := make(chan int)
 	ch2 := make(chan int)
-	m := make(map[int]int)
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
 	for v := range ch1 {
-		m[v] = m[v] + 1
-	}
-	for v := range ch2 {
-		m[v] = m[v] - 1
-	}
-	for v := range m {
-		if m[v] > 0 {
+		if v != <-ch2 {
 			return false
 		}
 	}
