@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/karlhungus/pxl"
+	"github.com/karlhungus/lib_pxl"
 	"image"
 	"image/color"
 )
