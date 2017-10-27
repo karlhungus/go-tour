@@ -49,5 +49,4 @@ func main() {
 
 	fmt.Println("Same Expect true:", Same(tree.New(1), tree.New(1)))
 	fmt.Println("Same Expect false:", Same(tree.New(1), tree.New(2)))
-
 }
